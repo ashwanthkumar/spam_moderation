@@ -1,0 +1,5 @@
+SPAM Moderation Plugin for Elgg 1.8 (build: > 2011032200)
+
+Update the plugin settings Akismet API key, after registering it from here (https://akismet.com/signup/#free).
+
+Every blog post is sent for checking against SPAM.
