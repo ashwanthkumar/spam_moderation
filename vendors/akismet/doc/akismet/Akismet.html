@@ -1,0 +1,632 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class Akismet</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class Akismet</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The Akismet PHP5 Class</p>
+<p class="description"><p>This class takes the functionality from the Akismet WordPress plugin written by <a href="http://photomatt.net/">Matt Mullenweg</a> and allows it to be integrated into any PHP5 application or website.</p><p>The original plugin is <a href="http://akismet.com/download/">available on the Akismet website</a>.</p><p><strong>Usage:</strong>   <div class="src-code"><ol><li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$akismet&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../akismet/Akismet.html">Akismet</a></span><span class="src-sym">(</span><span class="src-str">'http://www.example.com/blog/'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'aoeu1aoue'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$akismet</span><span class="src-sym">-&gt;</span><a href="../akismet/Akismet.html#methodsetCommentAuthor">setCommentAuthor</a><span class="src-sym">(</span><span class="src-var">$name</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$akismet</span><span class="src-sym">-&gt;</span><a href="../akismet/Akismet.html#methodsetCommentAuthorEmail">setCommentAuthorEmail</a><span class="src-sym">(</span><span class="src-var">$email</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$akismet</span><span class="src-sym">-&gt;</span><a href="../akismet/Akismet.html#methodsetCommentAuthorURL">setCommentAuthorURL</a><span class="src-sym">(</span><span class="src-var">$url</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$akismet</span><span class="src-sym">-&gt;</span><a href="../akismet/Akismet.html#methodsetCommentContent">setCommentContent</a><span class="src-sym">(</span><span class="src-var">$comment</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$akismet</span><span class="src-sym">-&gt;</span><a href="../akismet/Akismet.html#methodsetPermalink">setPermalink</a><span class="src-sym">(</span><span class="src-str">'http://www.example.com/blog/alex/someurl/'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if</span><span class="src-sym">(</span><span class="src-var">$akismet</span><span class="src-sym">-&gt;</span><a href="../akismet/Akismet.html#methodisCommentSpam">isCommentSpam</a><span class="src-sym">(</span><span class="src-sym">))</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;store&nbsp;the&nbsp;comment&nbsp;but&nbsp;mark&nbsp;it&nbsp;as&nbsp;spam&nbsp;(in&nbsp;case&nbsp;of&nbsp;a&nbsp;mis-diagnosis)</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">else</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;store&nbsp;the&nbsp;comment&nbsp;normally</span></div></li>
+</ol></div></p><p>Optionally you may wish to check if your WordPress API key is valid as in the example below.</p><p><div class="src-code"><ol><li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-var">$akismet&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../akismet/Akismet.html">Akismet</a></span><span class="src-sym">(</span><span class="src-str">'http://www.example.com/blog/'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'aoeu1aoue'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-key">if</span><span class="src-sym">(</span><span class="src-var">$akismet</span><span class="src-sym">-&gt;</span><a href="../akismet/Akismet.html#methodisKeyValid">isKeyValid</a><span class="src-sym">(</span><span class="src-sym">))&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;api&nbsp;key&nbsp;is&nbsp;okay</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-sym">}&nbsp;</span><span class="src-key">else&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-comm">//&nbsp;api&nbsp;key&nbsp;is&nbsp;invalid</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+</ol></div></p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Alex Potsides</li>
+				<li><span class="field">version:</span> 0.4</li>
+				<li><span class="field">link:</span> <a href="http://www.achingbrain.net/">http://www.achingbrain.net/</a></li>
+				<li><span class="field">name:</span> Akismet</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_Akismet.class.php.html">/Akismet.class.php</a> (line <span class="field">64</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+												<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																																																				
+												<div class="method-definition">
+											<span class="method-result">Akismet</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$blogURL</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$wordPressAPIKey</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#isCommentSpam" title="details" class="method-name">isCommentSpam</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#isKeyValid" title="details" class="method-name">isKeyValid</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setAkismetServer" title="details" class="method-name">setAkismetServer</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$akismetServer</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setAkismetVersion" title="details" class="method-name">setAkismetVersion</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$akismetVersion</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setAPIPort" title="details" class="method-name">setAPIPort</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$apiPort</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setCommentAuthor" title="details" class="method-name">setCommentAuthor</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$commentAuthor</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setCommentAuthorEmail" title="details" class="method-name">setCommentAuthorEmail</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$authorEmail</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setCommentAuthorURL" title="details" class="method-name">setCommentAuthorURL</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$authorURL</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setCommentContent" title="details" class="method-name">setCommentContent</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$commentBody</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setCommentType" title="details" class="method-name">setCommentType</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$commentType</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setPermalink" title="details" class="method-name">setPermalink</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$permalink</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setReferrer" title="details" class="method-name">setReferrer</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$referrer</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setUserIP" title="details" class="method-name">setUserIP</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$userip</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#submitHam" title="details" class="method-name">submitHam</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#submitSpam" title="details" class="method-name">submitSpam</a>
+										()
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">92</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Akismet</span>
+		<span class="method-name">
+			__construct
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$blogURL</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$wordPressAPIKey</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$blogURL</span><span class="var-description">: The URL of your blog.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$wordPressAPIKey</span><span class="var-description">: WordPress API key.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodisCommentSpam" id="isCommentSpam"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">isCommentSpam</span> (line <span class="line-number">180</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Tests for spam.</p>
+<p class="description"><p>Uses the web service provided by <a href="http://www.akismet.com">Akismet</a> to see whether or not the submitted comment is spam.  Returns a boolean value.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if the comment is spam, false if not</li>
+				<li><span class="field">throws:</span> Will throw an exception if the API key passed to the constructor is invalid.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			isCommentSpam
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodisKeyValid" id="isKeyValid"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">isKeyValid</span> (line <span class="line-number">127</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Makes a request to the Akismet service to see if the API key passed to the constructor is valid.</p>
+<p class="description"><p>Use this method if you suspect your API key is invalid.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True is if the key is valid, false if not.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			isKeyValid
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodsetAkismetServer" id="setAkismetServer"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setAkismetServer</span> (line <span class="line-number">284</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Defaults to rest.akismet.com</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setAkismetServer
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$akismetServer</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$akismetServer</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetAkismetVersion" id="setAkismetVersion"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setAkismetVersion</span> (line <span class="line-number">291</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Defaults to '1.1'</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setAkismetVersion
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$akismetVersion</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$akismetVersion</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetAPIPort" id="setAPIPort"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setAPIPort</span> (line <span class="line-number">277</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Defaults to 80</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setAPIPort
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$apiPort</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$apiPort</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetCommentAuthor" id="setCommentAuthor"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setCommentAuthor</span> (line <span class="line-number">247</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The name that the author submitted with the comment.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setCommentAuthor
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$commentAuthor</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$commentAuthor</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetCommentAuthorEmail" id="setCommentAuthorEmail"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setCommentAuthorEmail</span> (line <span class="line-number">256</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The email address that the author submitted with the comment.</p>
+<p class="description"><p>The address is assumed to be valid.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setCommentAuthorEmail
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$authorEmail</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$authorEmail</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetCommentAuthorURL" id="setCommentAuthorURL"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setCommentAuthorURL</span> (line <span class="line-number">263</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The URL that the author submitted with the comment.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setCommentAuthorURL
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$authorURL</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$authorURL</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetCommentContent" id="setCommentContent"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setCommentContent</span> (line <span class="line-number">270</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The comment's body text.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setCommentContent
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$commentBody</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$commentBody</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetCommentType" id="setCommentType"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setCommentType</span> (line <span class="line-number">240</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The type of comment being submitted.</p>
+<p class="description"><p>May be blank, comment, trackback, pingback, or a made up value like &quot;registration&quot; or &quot;wiki&quot;.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setCommentType
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$commentType</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$commentType</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetPermalink" id="setPermalink"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setPermalink</span> (line <span class="line-number">231</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">A permanent URL referencing the blog post the comment was submitted to.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setPermalink
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$permalink</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$permalink</span><span class="var-description">: The URL.  Optional.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetReferrer" id="setReferrer"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setReferrer</span> (line <span class="line-number">222</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">To override the referring page when submitting spam/ham later on</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setReferrer
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$referrer</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$referrer</span><span class="var-description">: The referring page.  Optional.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetUserIP" id="setUserIP"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setUserIP</span> (line <span class="line-number">213</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">To override the user IP address when submitting spam/ham later on</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setUserIP
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$userip</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$userip</span><span class="var-description">: An IP address.  Optional.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsubmitHam" id="submitHam"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">submitHam</span> (line <span class="line-number">204</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Submit ham that is incorrectly tagged as spam.</p>
+<p class="description"><p>Using this function will make you a good citizen as it helps Akismet to learn from its mistakes.  This will improve the service for everybody.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			submitHam
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodsubmitSpam" id="submitSpam"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">submitSpam</span> (line <span class="line-number">195</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Submit spam that is incorrectly tagged as ham.</p>
+<p class="description"><p>Using this function will make you a good citizen as it helps Akismet to learn from its mistakes.  This will improve the service for everybody.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			submitSpam
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Sat, 23 Feb 2008 11:03:15 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+	</p>
+	</div></body>
+</html>
