@@ -7,10 +7,9 @@
 	<description>Allows site admins to detect any posted content for spam.</description>
 	<category>service</category>
 	<website>http://ashwanthkumar.in/</website>
-	<copyright>See COPYRIGHT.txt</copyright>
 	<license>GNU Public License version 2</license>
 	<requires>
 		<type>elgg_version</type>
-		<version>2010040201</version>
+		<version>2011032200</version>
 	</requires>
 </plugin_manifest>
