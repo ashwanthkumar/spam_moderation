@@ -21,7 +21,7 @@ function check_for_spam_in_blog($entity) {
 		check_for_spam_in_blog_akismet($entity);
 	}
 	
-	if($enable_keyword_filter) {
+	if($enable_keyword_filter == 'yes') {
 		check_for_spam_in_blog_keyword_filter($entity);
 	}
 }
