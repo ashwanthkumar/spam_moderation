@@ -1,9 +1,9 @@
 <?php
 /**
- * SPAM Moderation
- * This service plugin allows the system to validate the content posted on the community against Akismet spam service.
+ * 	SPAM Moderation
+ * 	This service plugin allows the system to validate the content posted on the community against Akismet spam service.
  *
- * @package SpamModeration
+ *	@package SpamModeration
  *
  *	@date 13/04/2011 - LAst Updated
  *	@author Ashwanth Kumar <ashwanthkumar@googlemail.com>
@@ -74,14 +74,14 @@ function check_for_spam_in_blog_keyword_filter($entity) {
 	// Extract the keywords out of the list
 	$list = explode(',',$keywords);
 	
+	// Building the regular expression 
 	$regxp = "/";
-	
 	foreach($list as $word) {
 		$regxp = "$regxp$word|";
 	}
-	
 	$regxp .= "/";
 	
+	// Doing the check here
 	$keywords_cnt = preg_match_all($regxp,$entity->description,$filter_chk);
 	
 	if($keywords_cnt > 0) {
@@ -90,11 +90,30 @@ function check_for_spam_in_blog_keyword_filter($entity) {
 		register_error("Content is marked as spam and is saved as draft. You cannot publish a post which is detected as SPAM. Contact site administrator for more details. ");
 		
 		$entity->is_spam = TRUE;
-		
 		$entity->status = "draft"; // Save the post only as a draft
 		
 		forward(REFERER);
 	} else {
 		$entity->is_spam = FALSE;
 	}
+}
+
+/**
+ *	Generic SPAM Checking handler for EgllEntity type of objects
+ **/
+function check_for_spam_in_generic_entities($entity) {
+	$keywords = elgg_get_plugin_setting('keyword_list','spam_moderation');
+	
+	// Extract the keywords out of the list
+	$list = explode(',',$keywords);
+	
+	// Building the regular expression 
+	$regxp = "/";
+	foreach($list as $word) {
+		$regxp = "$regxp$word|";
+	}
+	$regxp .= "/";
+	
+	// Doing the check here
+	$keywords_cnt = preg_match_all($regxp,$entity->description,$filter_chk);
 }

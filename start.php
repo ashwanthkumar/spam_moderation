@@ -21,7 +21,10 @@ elgg_register_event_handler('update', 'object', 'check_for_spam');
 function check_for_spam($event, $type, $entity) {
 	if (elgg_instanceof($entity, 'object', 'blog')) {
 		check_for_spam_in_blog($entity);
-	} 
+	} else {
+		// A generic handler which works on any type of $entities that support, $entity->description where the content lies
+		check_for_spam_in_generic_entities($entity);
+	}
 }
 
 
@@ -52,4 +55,5 @@ function spam_moderation_init() {
  * @param unknown_type $params
  */
 function spam_check_akismet($hook, $entity_type, $returnvalue, $params) {
+	// @TODO
 }
