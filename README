@@ -3,6 +3,10 @@ SPAM Moderation Plugin for Elgg 1.8 (build: > 2011032200)
 Features:
 	* Update the plugin settings Akismet API key, after registering it from here (https://akismet.com/signup/#free).
 	* Internal keyword based filter of any type of content
+	
+Coming Soon
+	* Group Message spam check
+	* More External SPAM filetering service
 
 Note: Akismet Service works only with blog posts currently. More objects coming soon. :) 
 
