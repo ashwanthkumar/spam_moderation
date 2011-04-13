@@ -1,4 +1,4 @@
-SPAM Moderation Plugin for Elgg 1.8 (build: > 2011032200)
+SPAM Moderation Plugin for Elgg 1.8 (build: > 2011032200) Licensed under Apache License v2
 
 Features:
 	* Update the plugin settings Akismet API key, after registering it from here (https://akismet.com/signup/#free).
