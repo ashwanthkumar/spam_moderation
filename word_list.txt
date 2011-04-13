@@ -1,12 +1,5 @@
 # From http://www.wilsonweb.com/wmt8/spamfilter_phrases.htm
-Reverses aging
-'Hidden' assets
-stop snoring
-Free investment
-Dig up dirt on friends
-Stock disclaimer statement
-Multi level marketing
-Compare rates
+Reverses aging'Hidden' assets,stop snoringFree investmetDig up dirt on friendsStock disclaimer statementMulti level marketingCompare rates
 Cable converter
 Claims you can be removed from the list
 Removes wrinkles
