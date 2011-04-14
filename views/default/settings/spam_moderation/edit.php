@@ -29,30 +29,34 @@ $consumer_key_view = elgg_view('input/text', array(
 	'class' => 'text_input',
 ));
 
-// Write an action for this? May be.. 
-$consumer_key_validate = elgg_view('input/button', array(
+$mollom_private_key_label = elgg_echo('spam_moderation:mollom_private_key_label');
+$mollom_private_key = elgg_view('input/text', array(
+	'name' => 'params[mollom_private_key]',
+	'value' => $vars['entity']->mollom_private_key,
+	'class' => 'text_input',
+));
+
+$mollom_public_key_label = elgg_echo('spam_moderation:mollom_public_key_label');
+$mollom_public_key = elgg_view('input/text', array(
+	'name' => 'params[mollom_public_key]',
+	'value' => $vars['entity']->mollom_public_key,
+	'class' => 'text_input',
+));
+
+// Write an action for this? May be.. @todo
+$akismet_consumer_key_validate = elgg_view('input/button', array(
 	'name' => 'params[consumer_key_validate]',
 	'value' => 'Validate Key',
 ));
 
-$enable_akismet_label = elgg_echo('spam_moderation:enable_akismet');
-$enable_akismet = elgg_view('input/dropdown', array(
-	'name' => 'params[enable_akismet]',
+$spam_service = elgg_view('input/dropdown', array(
+	'name' => 'params[spam_service]',
 	'options_values' => array(
-		'yes' => elgg_echo('option:yes'),
-		'no' => elgg_echo('option:no'),
+		'akismet' => elgg_echo('Akismet'),
+		'mollom' => elgg_echo('Mollom'),
+		'keyword' => elgg_echo('Internal Keyword Filter'),
 	),
-	'value' => $vars['entity']->enable_akismet ? $vars['entity']->enable_akismet : 'no',
-));
-
-$enable_keyword_filter_label = elgg_echo('spam_moderation:enable_keyword_filter');
-$enable_keyword_filter = elgg_view('input/dropdown', array(
-	'name' => 'params[enable_keyword_filter]',
-	'options_values' => array(
-		'yes' => elgg_echo('option:yes'),
-		'no' => elgg_echo('option:no'),
-	),
-	'value' => $vars['entity']->enable_keyword_filter ? $vars['entity']->enable_keyword_filter : 'yes',
+	'value' => $vars['entity']->spam_service ? $vars['entity']->spam_service : 'keyword',
 ));
 
 $keyword_label = elgg_echo('spam_moderation:keyword_label');
@@ -63,23 +67,28 @@ $keyword_list = elgg_view('input/plaintext', array(
 		'no' => elgg_echo('option:no'),
 	),
 	'value' => $vars['entity']->keyword_list ? $vars['entity']->keyword_list : '',
+	'rows' => '10',
+	'cols' => '55',
 ));
 
 
 $instructions = elgg_echo('spam_moderation:akismet_instruction');
 $multiple_services = elgg_echo('spam_moderation:multiple_services');
+$example_keyword_list = elgg_echo('spam_moderation:example_keyword_list');
 
 $settings = <<<__HTML
 <div>$instructions</div>
+<div>$spam_service</div>
 <hr />
-<div>$enable_akismet_label $enable_akismet</div>
+<div>$mollom_public_key_label $mollom_public_key</div>
+<div>$mollom_private_key_label $mollom_private_key</div>
+<hr />
 <div>$consumer_key_string $consumer_key_view</div>
-<!-- <div>$consumer_key_validate</div> -->
+<!-- <div>$akismet_consumer_key_validate</div> -->
 <hr />
-<div>$enable_keyword_filter_label $enable_keyword_filter</div>
-<div>$keyword_label $keyword_list</div>
-<hr />
-<div>$multiple_services </div>
+<div>$keyword_label </div>
+<div>$keyword_list</div>
+<div>$example_keyword_list</div>
 __HTML;
 
 echo $settings;

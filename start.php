@@ -24,7 +24,19 @@
 
 elgg_register_event_handler('init', 'system', 'spam_moderation_init');
 elgg_register_event_handler('create', 'object', 'check_for_spam');
-elgg_register_event_handler('update', 'object', 'check_for_spam');
+elgg_register_event_handler('update', 'object', 'check_for_spam'); // -- Called twice.. Shouldn't be a pblm i guess 
+// @todo - annotation is used in grup topic replies
+elgg_register_event_handler('create', 'annotation', 'check_for_spam_annotation');
+
+// @todo complete it
+function check_for_spam_annotation($event, $type, $entity) {
+	$service = elgg_get_plugin_setting('spam_service', 'spam_moderation');
+	
+	if($entity->name == "group_topic_post") {
+		return check_for_group_topic_reply($entity,$service);
+	}
+	// @todo More type of annotations to be checked
+}
 
 /**
  *	Entry point for SPAM checking module. Determines the type of Object and calls the corresponding function.
@@ -32,14 +44,17 @@ elgg_register_event_handler('update', 'object', 'check_for_spam');
  *	@TODO: Add check for more type of objects
  **/
 function check_for_spam($event, $type, $entity) {
-	if (elgg_instanceof($entity, 'object', 'blog')) {
-		check_for_spam_in_blog($entity);
+	$service = elgg_get_plugin_setting('spam_service', 'spam_moderation');
+	
+	if (elgg_instanceof($entity, 'object', 'blog')) { // blog post checking
+		return check_for_spam_in_blog($entity,$service);
+	} else if(elgg_instanceof($entity, 'object', 'groupforumtopic')) { // Forum topic creation check
+		return check_for_spam_in_groupforumtopic_reply($entity,$service);
 	} else {
 		// A generic handler which works on any type of $entities that support, $entity->description where the content lies
-		check_for_spam_in_generic_entities($entity);
+		return check_for_spam_in_generic_entities($entity);
 	}
 }
-
 
 /**
  *	Initialize the SPAM Moderation plugin
@@ -49,10 +64,12 @@ function spam_moderation_init() {
 	// require libraries
 	$base = elgg_get_plugins_path() . 'spam_moderation';
 	elgg_register_library('akismet_php', "$base/vendors/akismet/Akismet.class.php");
+	elgg_register_library('mollom_php', "$base/vendors/mollom/Mollom.class.php");
 	elgg_register_library('spam_moderation', "$base/lib/spam_moderation.php");
 
 	elgg_load_library('spam_moderation');
 	elgg_load_library('akismet_php');
+	elgg_load_library('mollom_php');
 
 	// @TODO
 	// allow plugin authors to hook into this service
