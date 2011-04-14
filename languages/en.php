@@ -36,7 +36,7 @@ $english = array(
 	
 	'spam_moderation:akismet_instruction' => 'You must obtain a API key from <a href="https://akismet.com/signup/#free" target="_blank">Akismet</a>, this should take only a few minutes.',
 	
-	'spam_moderation:multiple_services' => '* Using both type of services, will have performance issues on slow servers. Also, if the post is large there might be some issue regarding the same. ',
+	'spam_moderation:multiple_services' => '* Using multiple services, will have performance issues on slow servers. ',
 );
 
 add_translation('en', $english);

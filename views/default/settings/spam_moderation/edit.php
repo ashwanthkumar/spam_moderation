@@ -29,6 +29,12 @@ $consumer_key_view = elgg_view('input/text', array(
 	'class' => 'text_input',
 ));
 
+// Write an action for this? May be.. 
+$consumer_key_validate = elgg_view('input/button', array(
+	'name' => 'params[consumer_key_validate]',
+	'value' => 'Validate Key',
+));
+
 $enable_akismet_label = elgg_echo('spam_moderation:enable_akismet');
 $enable_akismet = elgg_view('input/dropdown', array(
 	'name' => 'params[enable_akismet]',
@@ -61,16 +67,19 @@ $keyword_list = elgg_view('input/plaintext', array(
 
 
 $instructions = elgg_echo('spam_moderation:akismet_instruction');
+$multiple_services = elgg_echo('spam_moderation:multiple_services');
 
 $settings = <<<__HTML
 <div>$instructions</div>
 <hr />
 <div>$enable_akismet_label $enable_akismet</div>
 <div>$consumer_key_string $consumer_key_view</div>
+<!-- <div>$consumer_key_validate</div> -->
 <hr />
 <div>$enable_keyword_filter_label $enable_keyword_filter</div>
 <div>$keyword_label $keyword_list</div>
-
+<hr />
+<div>$multiple_services </div>
 __HTML;
 
 echo $settings;

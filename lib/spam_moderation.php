@@ -28,7 +28,7 @@
 function check_for_spam_in_blog($entity) {
 	$enable_akismet = elgg_get_plugin_setting('enable_akismet', 'spam_moderation');
 	$enable_keyword_filter = elgg_get_plugin_setting('enable_keyword_filter', 'spam_moderation');
-		
+	
 	if($enable_akismet == 'yes') {
 		check_for_spam_in_blog_akismet($entity);
 	}
@@ -42,7 +42,6 @@ function check_for_spam_in_blog($entity) {
  *	Checks for SPAM in blog posts using Akismet web service
  **/
 function check_for_spam_in_blog_akismet($entity) {
-
 	// Check for a valid key for the plugin
 	if(!isset($api_key) || empty($api_key)) {
 		register_error("API Key for Akismet is not set! Please contact the site administrator, for more details. ");
