@@ -3,13 +3,18 @@
 	<!-- Currently supports only Aksmit spam service -->
 	<name>SPAM Moderation </name>
 	<author>Ashwanth Kumar</author>
-	<version>pre alpha</version>
+	<version>alpha</version>
 	<description>Allows site admins to detect any posted content for spam.</description>
 	<category>service</category>
-	<website>http://ashwanthkumar.in/</website>
-	<license>GNU Public License version 2</license>
+	<website>https://github.com/ashwanthkumar/spam_moderation</website>
+	<license>Apache License version 2</license>
 	<requires>
 		<type>elgg_version</type>
 		<version>2011032200</version>
+	</requires>
+	<!-- Mollom uses cURL -->
+	<requires>
+		<type>php_extension</type>
+		<name>curl</name>
 	</requires>
 </plugin_manifest>
