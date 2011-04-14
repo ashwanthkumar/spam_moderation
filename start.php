@@ -50,10 +50,10 @@ function check_for_spam($event, $type, $entity) {
 		return check_for_spam_in_blog($entity,$service);
 	} else if(elgg_instanceof($entity, 'object', 'groupforumtopic')) { // Forum topic creation check
 		return check_for_spam_in_groupforumtopic_reply($entity,$service);
-	} else {
-		// A generic handler which works on any type of $entities that support, $entity->description where the content lies
-		return check_for_spam_in_generic_entities($entity);
-	}
+	} 
+	/*
+		More types shall we added upon request or you're free to do it yourself :) 
+	*/
 }
 
 /**

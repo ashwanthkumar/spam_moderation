@@ -40,7 +40,8 @@ function check_for_spam_in_blog($entity, $service = "keyword") {
 			// Check for a valid key for the plugin
 			if(!isset($api_key) || empty($api_key)) {
 				register_error("API Key for Akismet is not set! Please contact the site administrator, for more details. ");
-				forward(REFERER);
+				// forward(REFERER);
+				return false;
 			}
 
 			
@@ -59,9 +60,11 @@ function check_for_spam_in_blog($entity, $service = "keyword") {
 				$entity->is_spam = TRUE;
 				$entity->spam_source = $service;
 				$entity->status = "draft"; // Save the post only as draft
+				// Change the entity access to private, else its still visible if the user knows the URL (Post Id can be easily guessed)
+				$entity->access_id = 0;
 
-				// Forward back to the page where it came from, with the error message. 
-				forward(REFERER);
+				// Do not save the post yet!
+				return false; 
 			} else {
 			  // store the post normally
 			  $entity->is_spam = FALSE;
@@ -69,7 +72,56 @@ function check_for_spam_in_blog($entity, $service = "keyword") {
 		break;
 		
 		case "mollom":
-		// @todo
+			$mollom_public_key = elgg_get_plugin_setting('mollom_public_key','spam_moderation');
+			$mollom_private_key = elgg_get_plugin_setting('mollom_private_key','spam_moderation');
+			
+			Mollom::setPublicKey($mollom_public_key);
+			Mollom::setPrivateKey($mollom_private_key);
+			Mollom::setServerList(array('http://xmlrpc3.mollom.com', 'http://xmlrpc2.mollom.com', 'http://xmlrpc1.mollom.com'));
+
+			try {
+				// get feedback
+				$feedback = Mollom::checkContent(null, $entity->title, $entity->description, $user->name, null, $user->email, null, $user->guid);
+			} catch (Exception $e) {
+				// @todo handle the error here
+				register_error($e->getMessage());
+				return false;
+			}
+			
+			if(in_array($feedback['spam'], array('unsure', 'unknown')))  {
+				// @todo System not sure. What do we do? 
+				
+				// Validating based on the quality score.
+				// If QualityScore < 0.5 and its unsure, then its most likely SPAM.
+				if($feedback['quality'] < 0.5) {
+					// Content is a pure SPAM! 
+					register_error("Content is marked as spam and is saved as draft. You cannot publish a post which is detected as SPAM. Contact site administrator for more details. ");
+
+					$entity->is_spam = TRUE;
+					$entity->spam_source = $service;
+					$entity->status = "draft"; // Save the post only as draft
+					// Change the entity access to private, else its still visible if the user knows the URL (Post Id can be easily guessed)
+					$entity->access_id = 0;
+
+					return false;
+				} else {
+					// Benefit of doubt goes to the author and content
+					return true;
+				}
+			} else if($feedback['spam'] == 'ham') { // Content is OK!
+				return true;
+			} else if($feedback['spam'] == 'spam') {
+				// Content is a pure SPAM! 
+				register_error("Content is marked as spam and is saved as draft. You cannot publish a post which is detected as SPAM. Contact site administrator for more details. ");
+
+				$entity->is_spam = TRUE;
+				$entity->spam_source = $service;
+				$entity->status = "draft"; // Save the post only as draft
+				// Change the entity access to private, else its still visible if the user knows the URL (Post Id can be easily guessed)
+				$entity->access_id = 0;
+				
+				return false;
+			}
 		break;
 		
 		case "keyword":
@@ -96,10 +148,13 @@ function check_for_spam_in_blog($entity, $service = "keyword") {
 				$entity->is_spam = TRUE;
 				$entity->spam_source = $service;
 				$entity->status = "draft"; // Save the post only as a draft
+				// Change the entity access to private, else its still visible if the user knows the URL (Post Id can be easily guessed)
+				$entity->access_id = 0;
 
-				forward(REFERER);
+				return false;
 			} else {
 				$entity->is_spam = FALSE;
+				return true;
 			}
 		break;
 	}
@@ -126,7 +181,8 @@ function check_for_group_topic_reply($entity, $service = "keyword") {
 			// Check for a valid key for the plugin
 			if(!isset($api_key) || empty($api_key)) {
 				register_error("API Key for Akismet is not set! Please contact the site administrator, for more details. ");
-				forward(REFERER);
+				// forward(REFERER);
+				return false;
 			}
 
 			
@@ -142,27 +198,83 @@ function check_for_group_topic_reply($entity, $service = "keyword") {
 				// @TODO: Provide a method to override in case of a mis-diagnosis
 				register_error("Sorry your reply could not be posted, as it was detected to be a potential spam content. ");
 
-				// Forward back to the page where it came from, with the error message. 
-				// forward(REFERER);
+				// Do not save the content
 				return false;
 			} else {
-			  // store the post normally
-			  // $entity->is_spam = FALSE;
+				// Nothing more here, so just save it
 			  return true;
 			}
 		break;
 		
 		case "mallom":
 		// @todo
+			$mollom_public_key = elgg_get_plugin_setting('mollom_public_key','spam_moderation');
+			$mollom_private_key = elgg_get_plugin_setting('mollom_private_key','spam_moderation');
+			
+			Mollom::setPublicKey($mollom_public_key);
+			Mollom::setPrivateKey($mollom_private_key);
+			Mollom::setServerList(array('http://xmlrpc3.mollom.com', 'http://xmlrpc2.mollom.com', 'http://xmlrpc1.mollom.com'));
+
+			try {
+				// get feedback
+				$feedback = Mollom::checkContent(null, $group_topic_entity->title, $content, $user->name, null, $user->email, null, $user->guid);
+			} catch (Exception $e) {
+				// @todo handle the error here
+				register_error($e->getMessage());
+				return false;
+			}
+			
+			if(in_array($feedback['spam'], array('unsure', 'unknown')))  {
+				// @todo System not sure. What do we do? 
+				
+				// Validating based on the quality score.
+				// If QualityScore < 0.5 and its unsure, then its most likely SPAM.
+				if($feedback['quality'] < 0.5) {
+					// Content is a pure SPAM! 
+				register_error("Sorry your reply could not be posted, as it was detected to be a potential spam content. ");
+				return false;
+				} else {
+					// Benefit of doubt goes to the author and content
+					return true;
+				}
+			} else if($feedback['spam'] == 'ham') { // Content is OK!
+				return true;
+			} else if($feedback['spam'] == 'spam') {
+				// Content is a pure SPAM! 
+				register_error("Sorry your reply could not be posted, as it was detected to be a potential spam content. ");
+				return false;
+			}
 		break;
 		
 		case "keyword":
+			$keywords = elgg_get_plugin_setting('keyword_list','spam_moderation');
+			
+			// Extract the keywords out of the list
+			$list = explode(',',$keywords);
+			
+			// Building the regular expression 
+			$regxp = "/";
+			foreach($list as $word) {
+				$regxp = "$regxp$word|";
+			}
+			$regxp .= "/";
+			
+			// Doing the check here
+			$keywords_cnt = preg_match_all($regxp,$content,$filter_chk);
+			
+			if($keywords_cnt > 0) {
+				// Spam content match
+				register_error("Sorry your reply could not be posted, as it was detected to be a potential spam content. ");
+				return false;
+			} 
 		break;
 	}
 }
 
 /**
  *	Generic SPAM Checking handler for EgllEntity type of objects
+ *
+ *	@todo Extend it for better
  **/
 function check_for_spam_in_generic_entities($entity) {
 	$keywords = elgg_get_plugin_setting('keyword_list','spam_moderation');
@@ -178,5 +290,10 @@ function check_for_spam_in_generic_entities($entity) {
 	$regxp .= "/";
 	
 	// Doing the check here
-	$keywords_cnt = preg_match_all($regxp,$entity->description,$filter_chk);	
+	$keywords_cnt = preg_match_all($regxp,$entity->description,$filter_chk);
+	
+	if($keywords_cnt > 0) { // Match found
+		register_error("Sorry the Object can't be saved. It is identified to be a potential spam. ");
+		return false;
+	}
 }
