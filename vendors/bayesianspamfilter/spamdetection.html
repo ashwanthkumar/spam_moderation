@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1252">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 2.0  (Win32)">
+	<META NAME="CREATED" CONTENT="20071119;23383700">
+	<META NAME="CHANGEDBY" CONTENT="Cesar D. Rodas">
+	<META NAME="CHANGED" CONTENT="20071121;1365018">
+	<STYLE>
+	<!--
+		@page { size: 21cm 29.7cm; margin: 2cm }
+		P { margin-bottom: 0.21cm }
+		H1 { margin-bottom: 0.21cm }
+		H1.western { font-family: "Arial", sans-serif; font-size: 16pt }
+		H1.cjk { font-family: "Lucida Sans Unicode"; font-size: 16pt }
+		H1.ctl { font-family: "Tahoma"; font-size: 16pt }
+		H3 { margin-bottom: 0.21cm }
+		H3.western { font-family: "Arial", sans-serif }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<H1 CLASS="western" ALIGN=CENTER><FONT FACE="Arial, sans-serif"><FONT SIZE=5>Spam
+detection with PHP</FONT></FONT></H1>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm"><FONT FACE="Arial, sans-serif">Cesar
+D. Rodas</FONT><br>
+<A HREF="mailto:cesar@sixdegress.com.br"><FONT FACE="Arial, sans-serif">cesar@sixdegress.com.br<br>
+</FONT></A><A HREF="http://www.thyphp.com/"><FONT FACE="Arial, sans-serif">www.thyphp.com<br>
+</FONT></A><FONT FACE="Arial, sans-serif">Centro
+Nacional de Computaci&oacute;n<br>
+</FONT><FONT FACE="Arial, sans-serif">Campus
+de la UNA  - 2160 <br>
+</FONT><FONT FACE="Arial, sans-serif">San
+Lorenzo - Paraguay</FONT></P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm"><BR>
+</P>
+<H3 CLASS="western"><FONT FACE="Arial, sans-serif">Introduction</FONT></H3>
+<P ALIGN=LEFT STYLE="margin-bottom: 0cm"><FONT FACE="Arial, sans-serif">Day
+by day, with the exponential growth of the Internet it is harder to
+classify useful information from spam. Spam is unsolicited or
+undesired bulk electronic messages, it could be in electronic emails,
+forums, mobile phone messages, newsgroups, blogs, and in several
+others places.</FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0cm"><FONT FACE="Arial, sans-serif">Because
+the PHP is the <FONT SIZE=3><FONT FACE="Arial"><FONT COLOR="#000000">widest</FONT></FONT></FONT>
+ web development language, we propose an novel solution to classify
+spam from what is not, <FONT SIZE=3><FONT FACE="Arial"><FONT COLOR="#000000">written</FONT></FONT></FONT>
+ 100% in PHP. The solution is the implementation of the </FONT><A HREF="http://en.wikipedia.org/wiki/Bayesian_spam_filtering"><FONT FACE="Arial, sans-serif">Bayesian
+spam filtering</FONT></A></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0cm">&nbsp;</P>
+<H3 CLASS="western" ALIGN=LEFT><FONT FACE="Arial, sans-serif">How
+does this work?</FONT></H3>
+<P><FONT FACE="Arial, sans-serif">The </FONT><A HREF="http://en.wikipedia.org/wiki/Bayesian_spam_filtering"><FONT FACE="Arial, sans-serif">Bayesian
+spam filtering</FONT></A><FONT FACE="Arial, sans-serif">  is the
+process of using a </FONT><A HREF="http://en.wikipedia.org/wiki/Naive_Bayes_classifier"><FONT FACE="Arial, sans-serif">Naive
+Bayes classifier</FONT></A><FONT FACE="Arial, sans-serif"> to
+identify text spam.  This technique is used by </FONT><A HREF="http://en.wikipedia.org/wiki/SpamAssassin"><FONT FACE="Arial, sans-serif">SpamAssassin</FONT></A><FONT FACE="Arial, sans-serif">,
+</FONT><A HREF="http://en.wikipedia.org/wiki/SpamBayes"><FONT FACE="Arial, sans-serif">SpamBayes</FONT></A><FONT FACE="Arial, sans-serif">,
+</FONT><A HREF="http://en.wikipedia.org/wiki/Bogofilter"><FONT FACE="Arial, sans-serif">Bogofilter</FONT></A><FONT FACE="Arial, sans-serif">
+and </FONT><A HREF="http://en.wikipedia.org/wiki/Anti-Spam_SMTP_Proxy"><FONT FACE="Arial, sans-serif">ASSP</FONT></A><FONT FACE="Arial, sans-serif">.
+</FONT>
+</P>
+<P><FONT FACE="Arial, sans-serif">All the system could be reduced to
+a simple mathematic expression, which is </FONT><A HREF="http://en.wikipedia.org/wiki/Bayes'_theorem"><FONT FACE="Arial, sans-serif">Bayes'
+theorem</FONT></A><FONT FACE="Arial, sans-serif">  which returns  the
+probability that an text is spam, given that it has certain words in
+it, is equal to the probability of finding those certain words in
+spam email, times the probability that any email is spam, divided by
+the probability of finding those words in any email:.</FONT></P>
+<P><FONT FACE="Arial, sans-serif"><FONT SIZE=3><FONT FACE="Arial"><FONT COLOR="#000000">Suppose
+we have to know what is the probability of a given text to be a spam
+message</FONT></FONT></FONT>  or not if it has the word
+&ldquo;Phentermine&rdquo;. Suppose that &ldquo;Phentermine&rdquo;
+occur 5 times in true text and 800 on spam, and we have a set of 100
+true texts and 1000 spam.</FONT></P>
+<P><BR>
+</P>
+<P ALIGN=CENTER><IMG src="http://www.thyphp.com/spamfilter/spamdetection_html_m229e5c10.gif" NAME="Objeto1" ALIGN=ABSMIDDLE HSPACE=8 WIDTH=353 HEIGHT=91>
+ 
+</P>
+<P ALIGN=CENTER><BR>
+</P>
+<P ALIGN=LEFT><FONT FACE="Arial, sans-serif">Also here comes another
+problem, the process of toke a text into word is different for every
+language, and also there is many differences forms of a work for
+every language, example: walk, walking, walked, caminar, camin&oacute;,
+caminando. All those words represents the same meaning but it has
+another written form, and therefore a difference spam score.</FONT></P>
+<P><FONT FACE="Arial, sans-serif">To solve that problem we implement
+a </FONT><A HREF="http://en.wikipedia.org/wiki/N-gram"><FONT FACE="Arial, sans-serif">N-gram</FONT></A><FONT FACE="Arial, sans-serif">(is
+a sub-sequence of <I>n</I> items from a given sequence) based text
+instead of words. That is because in all the language words are
+sequences of letters.</FONT></P>
+<P ALIGN=LEFT><BR>
+</P>
+<P ALIGN=center><IMG src="http://www.thyphp.com/spamfilter/spamdetection_html_m4ace253c.png" NAME="gr&aacute;ficos1"  WIDTH=492 HEIGHT=366 BORDER=0><BR CLEAR=LEFT><BR>
+</P>
+<P><FONT FACE="Arial, sans-serif">In the upper graphic you can see
+how the system works, basically the system must have a set of texts,
+which are manually classified as spam or not. </FONT>
+</P>
+<P><BR>
+</P>
+<H3 CLASS="western" ALIGN=LEFT><FONT FACE="Arial, sans-serif">How
+implement</FONT></H3>
+<P><FONT FACE="Arial, sans-serif">To implement the Bayesian Spam
+Filter for PHP you must download it from here
+</FONT><A HREF="http://cesars.users.phpclasses.org/browse/package/4236.html"><FONT FACE="Arial, sans-serif">http://cesars.users.phpclasses.org/browse/package/4236.html</FONT></A><FONT FACE="Arial, sans-serif">
+for free. The project is protected under the BSD license, which made
+you free to include the source in closed projects.</FONT></P>
+<P><FONT FACE="Arial, sans-serif">The system comes with not spam
+rules, it must learn first, also this class provides only the
+computation method, you must write your own method to save what is
+learned by the system or use the example which saves what is learned 
+into a MySQL database.</FONT></P>
+<P ALIGN=LEFT><FONT FACE="Arial, sans-serif">The Learning phase is
+describe by the follow formula </FONT>
+</P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium">
+<IMG src="http://www.thyphp.com/spamfilter/spamdetection_html_798f82d7.gif" NAME="Objeto5" ALIGN=ABSMIDDLE HSPACE=8 WIDTH=334 HEIGHT=107></P>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium">
+<BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium">
+<FONT FACE="Arial, sans-serif"><FONT SIZE=2 STYLE="font-size: 11pt">By
+this formula we have a mathematic method to determine the accuracy of
+a text belong to spam by its n-grams.</FONT></FONT></P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0cm; font-style: normal; font-weight: medium">
+<BR>
+</P>
+<P ALIGN=CENTER><IMG src="http://www.thyphp.com/spamfilter/spamdetection_html_86ba4e2.gif" NAME="Objeto2" ALIGN=ABSMIDDLE HSPACE=8 WIDTH=247 HEIGHT=64></P>
+<P><BR>
+</P>
+<H3 CLASS="western" ALIGN=LEFT><FONT FACE="Arial, sans-serif">Improvements
+to the system and applications</FONT></H3>
+<P ALIGN=LEFT><FONT FACE="Arial, sans-serif">Because we are in the
+Web 2.0 era, where users can rate content and also categorize, an
+interesting project could be categorize using this class and also
+give the possibility to users rate as spam or not. If the system
+classified bad, it could learn it again. Then the site will always
+filtering almost any kind of spam content, even if spammers change
+the way of theirs spam.</FONT></P>
+<P ALIGN=LEFT><FONT FACE="Arial, sans-serif">Because the unwanted
+content from a site could be desire to a site the class is offer also
+a personalized concept of what is &ldquo;spam&rdquo;.</FONT></P>
+<H3 CLASS="western" ALIGN=LEFT><FONT FACE="Arial, sans-serif">Future
+work</FONT></H3>
+<P ALIGN=LEFT><FONT FACE="Arial, sans-serif">We want this project
+growths up with the peoples contribution and suggestion at the <A HREF="http://cesars.users.phpclasses.org/discuss/package/4236/">class
+forum</A>. Also peoples can contact me in my email to suggest, ask,
+tell its experience, and anything related.</FONT></P>
+<P ALIGN=LEFT><BR><BR>
+</P>
+</BODY>
+</HTML>
