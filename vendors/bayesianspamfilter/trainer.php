@@ -37,6 +37,8 @@ class trainer {
     var $examples;
     var $ngram;
     var $knowledge;
+	// Adding the $previous var
+	var $previous;
     
     function trainer() {
         $this->ngram = new ngram;
@@ -58,7 +60,7 @@ class trainer {
         
         foreach($examples as $tipo => $texts) {
             $params[$tipo] = 0;
-            $ngram->setInitialNgram( isSet($previous[$tipo]) ? $previous[$tipo] : array() );
+            $ngram->setInitialNgram( isset($previous[$tipo]) ? $previous[$tipo] : array() );
             foreach ($texts as $text) {
                 $ngram->setText($text);
                 for($i=3; $i <= 5;$i++) {
