@@ -297,3 +297,4 @@ function check_for_spam_in_generic_entities($entity) {
 		return false;
 	}
 }
+

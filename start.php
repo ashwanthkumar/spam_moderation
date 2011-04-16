@@ -70,6 +70,11 @@ function spam_moderation_init() {
 	elgg_load_library('spam_moderation');
 	elgg_load_library('akismet_php');
 	elgg_load_library('mollom_php');
+	
+	// Add admin menu item
+	// @todo Might want to move this to a 'feedback' section. something other than utils
+	elgg_register_admin_menu_item('administer', 'spam_moderation', 'spam');
+
 
 	// @TODO
 	// allow plugin authors to hook into this service

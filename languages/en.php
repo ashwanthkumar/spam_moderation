@@ -28,7 +28,10 @@
 
 $english = array(
 	'spam_moderation' => 'SPAM Detection service for Elgg',
-
+	
+	'admin:spam:spam_moderation' => 'Moderate SPAM ',
+	'admin:spam' => 'SPAM Utility',
+	
 	'spam_moderation:akismet_key' => 'API Key for Akismet SPAM Detection Service',
 	'spam_moderation:mollom_public_key_label' => 'Public Key from Mollom Service',
 	'spam_moderation:mollom_private_key_label' => 'Private Key from Mollom Service',
