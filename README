@@ -13,18 +13,16 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 
-SPAM Moderation Plugin for Elgg 1.8 (build: > 2011032200) 
+SPAM Moderation Plugin for Elgg 1.8 (build: > 2011032200) Alpha
 
 Features:
 	* Akismet (https://akismet.com/signup/#free) and Mollom (http://mollom.com/) external SPAM filter services.
 	* Internal keyword based filter of any type of content.
 	* Group Topic Reply and Blog post check against all the three services. 
 	
-Coming Soon
-	* More External SPAM filetering services.
 
 Currently out of 3 only one service could be choosen. 
 
 There are some known issues when using Mollom. When the server responds with 'unsure' the content is categorized based on the quality score. Look at /lib/spam_moderation.php for more details how it is implemented.
 
-Updated: 14/04/2011
+Updated: 17/04/2011

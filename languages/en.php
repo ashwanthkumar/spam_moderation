@@ -29,17 +29,14 @@
 $english = array(
 	'spam_moderation' => 'SPAM Detection service for Elgg',
 	
-	'admin:spam:spam_moderation' => 'Moderate SPAM ',
-	'admin:spam' => 'SPAM Utility',
-	
 	'spam_moderation:akismet_key' => 'API Key for Akismet SPAM Detection Service',
-	'spam_moderation:mollom_public_key_label' => 'Public Key from Mollom Service',
-	'spam_moderation:mollom_private_key_label' => 'Private Key from Mollom Service',
-	'spam_moderation:keyword_label' => 'Keyword(s) List (Comma separated)',
-	'spam_moderation:example_keyword_list' => 'For best results do not leave a space between the words.',
-	
 	'spam_moderation:akismet_instruction' => 'You must obtain a API key from <a href="https://akismet.com/signup/#free" target="_blank">Akismet</a>, or Private and Public keys from <a href="http://mollom.com" target="_blank">Mollom</a> to use their respective service. ',
 	
+	'spam_moderation:mollom_public_key_label' => 'Public Key from Mollom Service',
+	'spam_moderation:mollom_private_key_label' => 'Private Key from Mollom Service',
+	
+	'spam_moderation:keyword_label' => 'Keyword(s) List (Comma separated)',
+	'spam_moderation:example_keyword_list' => 'For best results do not leave a space between the words.',
 );
 
 add_translation('en', $english);

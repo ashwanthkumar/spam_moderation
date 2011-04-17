@@ -19,16 +19,15 @@
  * 	This service plugin allows the system to validate the content posted on the community against Akismet spam service.
  *
  *	@package SpamModeration
- *	@date 14/04/2011 - Last Updated
+ *	@date 17/04/2011 - Last Updated
  */
 
 elgg_register_event_handler('init', 'system', 'spam_moderation_init');
 elgg_register_event_handler('create', 'object', 'check_for_spam');
 elgg_register_event_handler('update', 'object', 'check_for_spam'); // -- Called twice.. Shouldn't be a pblm i guess 
-// @todo - annotation is used in grup topic replies
 elgg_register_event_handler('create', 'annotation', 'check_for_spam_annotation');
 
-// @todo complete it
+// @todo complete it, with more types
 function check_for_spam_annotation($event, $type, $entity) {
 	$service = elgg_get_plugin_setting('spam_service', 'spam_moderation');
 	
@@ -63,19 +62,15 @@ function spam_moderation_init() {
 
 	// require libraries
 	$base = elgg_get_plugins_path() . 'spam_moderation';
+	elgg_register_library('spam_moderation', "$base/lib/spam_moderation.php");
+	
 	elgg_register_library('akismet_php', "$base/vendors/akismet/Akismet.class.php");
 	elgg_register_library('mollom_php', "$base/vendors/mollom/Mollom.class.php");
-	elgg_register_library('spam_moderation', "$base/lib/spam_moderation.php");
 
 	elgg_load_library('spam_moderation');
 	elgg_load_library('akismet_php');
 	elgg_load_library('mollom_php');
 	
-	// Add admin menu item
-	// @todo Might want to move this to a 'feedback' section. something other than utils
-	elgg_register_admin_menu_item('administer', 'spam_moderation', 'spam');
-
-
 	// @TODO
 	// allow plugin authors to hook into this service
 	// elgg_register_plugin_hook_handler('spam_check_akismet', 'spam_moderation', 'spam_check_akismet');

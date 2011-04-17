@@ -24,7 +24,9 @@
 
 
 /**
- *	Trains the internal filter using
+ *	Trains the internal Bayesian filter using Existing content
+ **/
 function train_filter() {
+	 
 }
  

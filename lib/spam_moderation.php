@@ -19,7 +19,7 @@
  * 	This service plugin allows the system to validate the content posted on the community against Akismet spam service.
  *
  *	@package SpamModeration
- *	@date 14/04/2011 - Last Updated
+ *	@date 17/04/2011 - Last Updated
  */
 
 /**
