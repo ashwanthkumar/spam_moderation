@@ -16,7 +16,7 @@
  */
 
  /**
- * 	This service plugin allows the system to validate the content posted on the community against Akismet spam service.
+ * 	This service plugin allows the system to validate the content posted on the community against Akismet spam service. 
  *
  *	@package SpamModeration
  *	@date 17/04/2011 - Last Updated
@@ -62,8 +62,8 @@ function spam_moderation_init() {
 
 	// require libraries
 	$base = elgg_get_plugins_path() . 'spam_moderation';
-	elgg_register_library('spam_moderation', "$base/lib/spam_moderation.php");
 	
+	elgg_register_library('spam_moderation', "$base/lib/spam_moderation.php");
 	elgg_register_library('akismet_php', "$base/vendors/akismet/Akismet.class.php");
 	elgg_register_library('mollom_php', "$base/vendors/mollom/Mollom.class.php");
 
